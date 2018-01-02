@@ -218,10 +218,10 @@ class dazsleRhalphabetBuilder:
 		getattr(lWFail,'import')(lFail,r.RooFit.RecycleConflictNodes())
 		getattr(lWFail,'import')(lNFail,r.RooFit.RecycleConflictNodes())
 		if iCat.find("1") > -1:
-			lWPass.writeToFile("ralpha"+self._outputName.replace(".root","_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt.root"))
+			lWPass.writeToFile("ralpha"+self._outputName+"_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt")
 		else:
-			lWPass.writeToFile("ralpha"+self._outputName.replace(".root","_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt.root"),False)
-		lWFail.writeToFile("ralpha"+self._outputName.replace(".root","_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt.root"),False)
+			lWPass.writeToFile("ralpha"+self._outputName+"_"+str(self._poly_lNP)+str(self._poly_lNR)+"_pt",False)
+		lWFail.writeToFile("ralpha"+self._outputName,False)
 		return [lPass,lFail]
 
 	def buildRooPolyArray(self,iPt,iRho,iQCD,iZero,iVars):
