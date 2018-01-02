@@ -1,0 +1,42 @@
+Combine meeting with Cris - 12/18/17
+- https://github.com/DAZSLE/ZPrimePlusJet/blob/zqqjet2016/fitting/ZqqJet/buildRhalphabet.py
+
+- pt v rho -> mtw v mt
+- polynomial orders (3,4) -> (2,2)
+- Keep lines 483-495 for now (in MakeWorkspace function)
+- QCDeff needs to change
+- buildPolynomialArray needs to be hacked to grab parameters from my own files
+- get rid of signal chopping (on low and high ends)
+
+- input histograms should already have per event and flat weights
+- base.root and ralphabase.root are outputs
+
+- need hist_...test.root from cris to do tests
+- getting script to output the 2D plots (has res mass and jet mass already - just need to change cuts)
+
+To grab specific github repo subdirectory
+svn checkout https://github.com/DAZSLE/ZPrimePlusJet/branches/zqqjet2016/fitting
+
+Steps to run ralphabet
+python buildRhalphabet.py -b
+python makeCards.py
+- run whatever the last line of output from makeCards.py is
+mv ralphabase.root_34_pt ralphabase_34_pt.root
+combine -M MaxLikelihoodFit card_rhalphabet_34_pt.txt --saveWithUncertainties --saveShapes -v 2 --rMin -50 --rMax 50
+
+ERRROR
+
+Traceback (most recent call last):
+  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/bin/slc6_amd64_gcc491/text2workspace.py", line 57, in <module>
+    MB.doModel()
+  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ModelTools.py", line 96, in doModel
+    self.doObservables()
+  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ShapeTools.py", line 24, in doObservables
+    self.prepareAllShapes();
+  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ShapeTools.py", line 242, in prepareAllShapes
+    shape = self.getShape(b,p); norm = 0;
+  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ShapeTools.py", line 394, in getShape
+    if not self.wsp: raise RuntimeError, "Failed to find %s in file %s (from pattern %s, %s)" % (wname,finalNames[0],names[1],names[0])
+RuntimeError: Failed to find w_fail_cat1 in file ralphabase_34_pt.root (from pattern w_fail_cat1:$PROCESS_fail_cat1, ralphabase_34_pt.root)
+Error when running the combination:
+	Failed to convert the input datacard from LandS to RooStats format. The lines above probably contain more information about the error.

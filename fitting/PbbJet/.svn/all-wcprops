@@ -1,0 +1,227 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet
+END
+buildRhalphabet.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/buildRhalphabet.py
+END
+runLimitsPbb.sh
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/runLimitsPbb.sh
+END
+datacard_novbf.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/datacard_novbf.tpl
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/README.md
+END
+plotDeltaLL2D.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/plotDeltaLL2D.py
+END
+makeCardsHbb.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/makeCardsHbb.py
+END
+datacardZonly.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/datacardZonly.tpl
+END
+runLimits.sh
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/runLimits.sh
+END
+datacard.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/datacard.tpl
+END
+printImpact.sh
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/printImpact.sh
+END
+limit.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/limit.py
+END
+Hbb_create.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/Hbb_create.py
+END
+plotDeltaLL.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/plotDeltaLL.py
+END
+fitRalphabetHbb.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/fitRalphabetHbb.py
+END
+datacard_muonCR.root
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/datacard_muonCR.root
+END
+tmpCard.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/tmpCard.txt
+END
+Pbb_create.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/Pbb_create.py
+END
+cccPlot.py
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/cccPlot.py
+END
+plotValidation.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/plotValidation.py
+END
+makeCards.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/makeCards.py
+END
+Pbb_create_condor.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/Pbb_create_condor.py
+END
+validateInputs.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/validateInputs.py
+END
+ralphabase.root
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/ralphabase.root
+END
+datacardPbb.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/datacardPbb.tpl
+END
+plotMuonCR.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/plotMuonCR.py
+END
+writeMuonCRDatacard.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/writeMuonCRDatacard.py
+END
+base.root
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/base.root
+END
+buildRhalphabetHbb.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/buildRhalphabetHbb.py
+END
+Pbb_create2.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/Pbb_create2.py
+END
+datacardZbb.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/datacardZbb.tpl
+END
+runFtest.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/runFtest.py
+END
+hist_1DPbb.root
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/hist_1DPbb.root
+END
+rootlogon.C
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/rootlogon.C
+END
+datacard_muonCR.txt
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/datacard_muonCR.txt
+END
+hist_1DZbb_ptCat.root
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/hist_1DZbb_ptCat.root
+END
+hist_1DZbb.root
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/hist_1DZbb.root
+END
+validateMLFit.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/PbbJet/validateMLFit.py
+END

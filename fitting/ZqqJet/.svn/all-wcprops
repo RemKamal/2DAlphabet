@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet
+END
+massplotPaper.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/massplotPaper.py
+END
+makeCards.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/makeCards.py
+END
+buildRhalphabet.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/buildRhalphabet.py
+END
+validateInputs.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/ZqqJet/validateInputs.py
+END
+Zqq_create.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/Zqq_create.py
+END
+plotnuis.sh
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/plotnuis.sh
+END
+plotLims.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/plotLims.py
+END
+card_rhalphabet_34_pt.txt
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/card_rhalphabet_34_pt.txt
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/README.md
+END
+tdrstyle.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/ZqqJet/tdrstyle.py
+END
+datacard.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/datacard.tpl
+END
+rootlogon.C
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/ZqqJet/rootlogon.C
+END
+limit.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/limit.py
+END
+diffNuisances.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/ZqqJet/diffNuisances.py
+END
+plotPt.py
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/ZqqJet/plotPt.py
+END
+plotPoly.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/plotPoly.py
+END
+mlfit_param.root
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting/ZqqJet/mlfit_param.root
+END

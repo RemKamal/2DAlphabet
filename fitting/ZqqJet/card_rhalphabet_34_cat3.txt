@@ -1,0 +1,110 @@
+imax 2
+jmax *
+kmax *
+---------------
+shapes * * base.root w_$CHANNEL:$PROCESS_$CHANNEL w_$CHANNEL:$PROCESS_$CHANNEL_$SYSTEMATIC
+shapes qcd * ralphabase_34_pt.root w_$CHANNEL:$PROCESS_$CHANNEL
+---------------
+bin pass_cat3 fail_cat3
+observation -1 -1
+------------------------------
+bin pass_cat3 pass_cat3 pass_cat3 pass_cat3 pass_cat3 fail_cat3 fail_cat3 fail_cat3 fail_cat3 fail_cat3
+process zqq100 wqq zqq tqq qcd zqq100 wqq zqq tqq qcd
+process 0 1 2 3 4 0 1 2 3 4
+rate -1 -1 -1 -1 1 -1 -1 -1 -1 1
+--------------------------------
+lumi lnN 1.023 1.023 1.023 - - 1.023 1.023 1.023 - -
+scale shape 0.03 0.03 0.03 - - 0.03 0.03 0.03 - -
+smear shape 0.25 0.25 0.25 - - 0.25 0.25 0.25 - -
+veff lnN 1.074 1.074 1.074 - - 1.074 1.074 1.074 - -
+wznormE3 lnN - 1.05 - - - - 1.05 - - -
+znormE3 lnN - 1.25 1.25 - - - 1.25 1.25 - -
+znormQ lnN 1.1 1.1 1.1	- - 1.1	1.1 1.1	- -
+jecs lnN 1.02 1.02 1.02 1.02 - 1.02 1.02 1.02 1.02 -
+trigger lnN 1.02 1.02 1.02 1.02 - 1.02 1.02 1.02 1.02 -
+muveto lnN 1.005 1.005 1.005 1.005 - 1.005 1.005 1.005 1.005 -
+eveto lnN 1.005 1.005 1.005 1.005 - 1.005 1.005 1.005 1.005 -
+ttnormSF lnN - - - 1.05 - - - - 1.05 -
+tteffSF lnN - - - 1.1 - - - - 0.97 -
+-------------------------------
+qcdeff  flatParam
+p0r0  flatParam
+p1r0  flatParam
+p2r0  flatParam
+p3r0  flatParam
+p0r1  flatParam
+p1r1  flatParam
+p2r1  flatParam
+p3r1  flatParam
+p0r2  flatParam
+p1r2  flatParam
+p2r2  flatParam
+p3r2  flatParam
+p0r3  flatParam
+p1r3  flatParam
+p2r3  flatParam
+p3r3  flatParam
+p0r4  flatParam
+p1r4  flatParam
+p2r4  flatParam
+p3r4  flatParam
+qcd_fail_cat3_Bin1 flatParam 
+qcd_fail_cat3_Bin2 flatParam 
+qcd_fail_cat3_Bin3 flatParam 
+qcd_fail_cat3_Bin4 flatParam 
+qcd_fail_cat3_Bin5 flatParam 
+qcd_fail_cat3_Bin6 flatParam 
+qcd_fail_cat3_Bin7 flatParam 
+qcd_fail_cat3_Bin8 flatParam 
+qcd_fail_cat3_Bin9 flatParam 
+qcd_fail_cat3_Bin10 flatParam 
+qcd_fail_cat3_Bin11 flatParam 
+qcd_fail_cat3_Bin12 flatParam 
+qcd_fail_cat3_Bin13 flatParam 
+qcd_fail_cat3_Bin14 flatParam 
+qcd_fail_cat3_Bin15 flatParam 
+qcd_fail_cat3_Bin16 flatParam 
+qcd_fail_cat3_Bin17 flatParam 
+qcd_fail_cat3_Bin18 flatParam 
+qcd_fail_cat3_Bin19 flatParam 
+qcd_fail_cat3_Bin20 flatParam 
+qcd_fail_cat3_Bin21 flatParam 
+qcd_fail_cat3_Bin22 flatParam 
+qcd_fail_cat3_Bin23 flatParam 
+qcd_fail_cat3_Bin24 flatParam 
+qcd_fail_cat3_Bin25 flatParam 
+qcd_fail_cat3_Bin26 flatParam 
+qcd_fail_cat3_Bin27 flatParam 
+qcd_fail_cat3_Bin28 flatParam 
+qcd_fail_cat3_Bin29 flatParam 
+qcd_fail_cat3_Bin30 flatParam 
+qcd_fail_cat3_Bin31 flatParam 
+qcd_fail_cat3_Bin32 flatParam 
+qcd_fail_cat3_Bin33 flatParam 
+qcd_fail_cat3_Bin34 flatParam 
+qcd_fail_cat3_Bin35 flatParam 
+qcd_fail_cat3_Bin36 flatParam 
+qcd_fail_cat3_Bin37 flatParam 
+qcd_fail_cat3_Bin38 flatParam 
+qcd_fail_cat3_Bin39 flatParam 
+qcd_fail_cat3_Bin40 flatParam 
+qcd_fail_cat3_Bin41 flatParam 
+qcd_fail_cat3_Bin42 flatParam 
+qcd_fail_cat3_Bin43 flatParam 
+qcd_fail_cat3_Bin44 flatParam 
+qcd_fail_cat3_Bin45 flatParam 
+qcd_fail_cat3_Bin46 flatParam 
+qcd_fail_cat3_Bin47 flatParam 
+qcd_fail_cat3_Bin48 flatParam 
+qcd_fail_cat3_Bin49 flatParam 
+qcd_fail_cat3_Bin50 flatParam 
+qcd_fail_cat3_Bin51 flatParam 
+qcd_fail_cat3_Bin52 flatParam 
+qcd_fail_cat3_Bin53 flatParam 
+qcd_fail_cat3_Bin54 flatParam 
+qcd_fail_cat3_Bin55 flatParam 
+qcd_fail_cat3_Bin56 flatParam 
+qcd_fail_cat3_Bin57 flatParam 
+qcd_fail_cat3_Bin58 flatParam 
+qcd_fail_cat3_Bin59 flatParam 
+qcd_fail_cat3_Bin60 flatParam 

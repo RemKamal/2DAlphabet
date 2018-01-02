@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/DAZSLE/ZPrimePlusJet/!svn/ver/732/branches/zqqjet2016/fitting
+END
+fit_fullralph.py
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/fit_fullralph.py
+END
+ralphabase.root
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/ralphabase.root
+END
+tools.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/tools.py
+END
+card.txt
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/card.txt
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/README.md
+END
+hist.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/hist.py
+END
+hists_1D.root
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/hists_1D.root
+END
+tdrstyle.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/tdrstyle.py
+END
+rootlogon.C
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/rootlogon.C
+END
+test.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/test.py
+END
+HSR_create.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/HSR_create.py
+END
+rhalphabet_builder.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/rhalphabet_builder.py
+END
+fit.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/fit.py
+END
+testphil.root
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/testphil.root
+END
+plotPostfit.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/plotPostfit.py
+END
+card_hist.txt
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DAZSLE/ZPrimePlusJet/!svn/ver/731/branches/zqqjet2016/fitting/card_hist.txt
+END
