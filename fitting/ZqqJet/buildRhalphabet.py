@@ -49,29 +49,6 @@ V_SF_ERR = 0.066
 # Initialize a list to store pass and fail hists
 # DOESN'T GET USED FOR ANYTHING THOUGH!
 fHists=[]
-
-if __name__ == '__main__':
-	parser = OptionParser()
-	parser.add_option('-b', action='store_true', dest='noX', default=False, help='no X11 windows')
-	parser.add_option('-i','--idir', dest='idir', default = 'data/',help='directory with data', metavar='idir')
-	parser.add_option('-o','--odir', dest='odir', default = 'plots/',help='directory to write plots', metavar='odir')
-	parser.add_option('--pseudo', action='store_true', dest='pseudo', default =False,help='data = MC', metavar='isData')
-	parser.add_option('--pseudo15', action='store_true', dest='pseudo15', default =False,help='data = MC (fail) and fail*0.05 (pass)', metavar='isData')
-	parser.add_option('--input', dest='input', default = 'histInputs/hist_1DZqq-dataReRecoSpring165eff-3481-Gridv130-final.root',help='directory with data', metavar='idir')
-
-	(options, args) = parser.parse_args()
-
-	import tdrstyle
-	tdrstyle.setTDRStyle()
-	r.gStyle.SetPadTopMargin(0.10)
-	r.gStyle.SetPadLeftMargin(0.16)
-	r.gStyle.SetPadRightMargin(0.10)
-	r.gStyle.SetPalette(1)
-	r.gStyle.SetPaintTextFormat("1.1f")
-	r.gStyle.SetOptFit(0000)
-	r.gROOT.SetBatch()
-	
-	main(options,args)
 # -------------------------------------------------------------------------------------
 def main(options,args):
 	#########################################################
@@ -193,9 +170,9 @@ def loadHistograms(input_file,pseudo,pseudo15):
 
 	print 'tqq_fail ', lHF4.Integral()
 	print 'total mc pass ', lHP1.Integral()+lHP2.Integral()+lHP3.Integral()+lHP4.Integral()
-    print 'total mc fail ', lHF1.Integral()+lHF2.Integral()+lHF3.Integral()+lHF4.Integral()
+	print 'total mc fail ', lHF1.Integral()+lHF2.Integral()+lHF3.Integral()+lHF4.Integral()
   
-  	# If True, we want data = MC
+	# If True, we want data = MC
 	if pseudo:
 		lHP0 = lHP3.Clone("data_obs_pass")
 		lHF0 = lHF3.Clone("data_obs_fail")
@@ -1166,4 +1143,25 @@ class dazsleRhalphabetBuilder:
 		for i in range(1,h.GetNbinsX()+1):
 			if h.GetBinCenter(i) > m + 1.5*math.sqrt(m): h.SetBinContent(i,0.);
 
+if __name__ == '__main__':
+	parser = OptionParser()
+	parser.add_option('-b', action='store_true', dest='noX', default=False, help='no X11 windows')
+	parser.add_option('-i','--idir', dest='idir', default = 'data/',help='directory with data', metavar='idir')
+	parser.add_option('-o','--odir', dest='odir', default = 'plots/',help='directory to write plots', metavar='odir')
+	parser.add_option('--pseudo', action='store_true', dest='pseudo', default =False,help='data = MC', metavar='isData')
+	parser.add_option('--pseudo15', action='store_true', dest='pseudo15', default =False,help='data = MC (fail) and fail*0.05 (pass)', metavar='isData')
+	parser.add_option('--input', dest='input', default = 'histInputs/hist_1DZqq-dataReRecoSpring165eff-3481-Gridv130-final.root',help='directory with data', metavar='idir')
 
+	(options, args) = parser.parse_args()
+
+	import tdrstyle
+	tdrstyle.setTDRStyle()
+	r.gStyle.SetPadTopMargin(0.10)
+	r.gStyle.SetPadLeftMargin(0.16)
+	r.gStyle.SetPadRightMargin(0.10)
+	r.gStyle.SetPalette(1)
+	r.gStyle.SetPaintTextFormat("1.1f")
+	r.gStyle.SetOptFit(0000)
+	r.gROOT.SetBatch()
+	
+	main(options,args)
