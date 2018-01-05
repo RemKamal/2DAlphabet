@@ -23,20 +23,5 @@ python makeCards.py
 - run whatever the last line of output from makeCards.py is
 mv ralphabase.root_34_pt ralphabase_34_pt.root
 combine -M MaxLikelihoodFit card_rhalphabet_34_pt.txt --saveWithUncertainties --saveShapes -v 2 --rMin -50 --rMax 50
+combine -M Asymptotic card_rhalphabet_34_pt.txt --rMin -50 --rMax 50
 
-ERRROR
-
-Traceback (most recent call last):
-  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/bin/slc6_amd64_gcc491/text2workspace.py", line 57, in <module>
-    MB.doModel()
-  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ModelTools.py", line 96, in doModel
-    self.doObservables()
-  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ShapeTools.py", line 24, in doObservables
-    self.prepareAllShapes();
-  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ShapeTools.py", line 242, in prepareAllShapes
-    shape = self.getShape(b,p); norm = 0;
-  File "/uscms_data/d3/lcorcodi/BStar13TeV/CMSSW_7_4_7_patch2/python/HiggsAnalysis/CombinedLimit/ShapeTools.py", line 394, in getShape
-    if not self.wsp: raise RuntimeError, "Failed to find %s in file %s (from pattern %s, %s)" % (wname,finalNames[0],names[1],names[0])
-RuntimeError: Failed to find w_fail_cat1 in file ralphabase_34_pt.root (from pattern w_fail_cat1:$PROCESS_fail_cat1, ralphabase_34_pt.root)
-Error when running the combination:
-	Failed to convert the input datacard from LandS to RooStats format. The lines above probably contain more information about the error.

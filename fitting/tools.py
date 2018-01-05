@@ -78,6 +78,7 @@ def smear(iVar,iDataHist,iScale=0.1):
     return [lUp,lDown]    
 
 def proj(iLabel,iBin,iH,iNBins,iXMin,iXMax):
+    # TH1F in mass
     lH = r.TH1F(iH.GetName()+"_"+iLabel+iBin,iH.GetName()+"_"+iLabel+iBin,iNBins,iXMin,iXMax)
     for iM in range(1,iH.GetNbinsX()+1):
         if iH.GetXaxis().GetBinCenter(iM) < lH.GetXaxis().GetXmin() or iH.GetXaxis().GetBinCenter(iM) > lH.GetXaxis().GetXmax():

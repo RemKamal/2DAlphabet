@@ -1,0 +1,33 @@
+Logical Progression of buildRhalphabet.py
+
+__main__:
+	-> Options
+	-> gStyle
+	-> main(options,args)
+		-> loadHistograms(input_file,pseudo=FALSE,pseudo15=FALSE)
+			-x scalehists(TH1,iType=0,iPassId)
+
+		-> dazsleRhalphabetBuilder(list_hpass,list_hfail,input_file)
+			-> LoopOverPtBins(self)
+				-> workspaceInputs(self, hpass_thisPtBin, hfail_thisPtBin, sBin)
+					-x rooTheHistFunc(self,[hpass_proc_ptbin,hfail_proc_ptbin],sProc,sPtBin)
+
+				-> makeRhalph(self,iHs,iHPs,iPt,iCat) 
+					-x buildPolynomialArray(self, iVars,iNVar0,iNVar1,iLabel0,iLabel1,iXMin0,iXMax0)
+					-x buildRooPolyArray(self,iPt,iRho,iQCD,iZero,iVars)
+
+				-> getSignals(self,iHP,iHF,iBin)
+					-x rooTheHistFunc(self,[hpass_proc_ptbin,hfail_proc_ptbin],sProc,sPtBin)
+					
+				-> makeWorkspace(self,iOutput,iDatas,iFuncs,iVars,iCat="cat0",iShift=True)
+					-x signalChopper(self,h,m)
+
+
+Change log:
+f -> input_file
+Some reordering for my own sanity
+self._nptbins -> self._pt_nbins
+pPt -> approx_pt
+
+| if i1 == 0:											-> | if i1 == 0:
+|	pVal  = math.pow(10,-i1-min(int(i0*0.5),1))			-> |	pVal  = math.pow(10,-min(int(i0*0.5),1))
