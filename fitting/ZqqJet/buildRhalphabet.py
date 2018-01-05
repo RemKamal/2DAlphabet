@@ -21,6 +21,13 @@
 # Output is ...
 
 # Keyword 'NOTE' used to make comments about things to revisit
+# The number following 'NOTE' denotes catagories of fixes. Those with the same number should be addressed at the same time
+# 1 - Index for processes
+# 2 - Built in scale factors in a list that relies on proper ordering
+# 3 - Replacing 'l' and 'p' with more descriptive names
+# 4 - Scale hist relying on obscure pass and type IDs
+# 5 - Deleting self._lEff* and anything tied to them
+# 6 - 
 
 
 import ROOT as r,sys,math,array,os
@@ -46,9 +53,6 @@ W_SF = 1.35
 V_SF = 0.891
 V_SF_ERR = 0.066
 
-# Initialize a list to store pass and fail hists
-# DOESN'T GET USED FOR ANYTHING THOUGH!
-fHists=[]
 # -------------------------------------------------------------------------------------
 def main(options,args):
 	#########################################################
@@ -86,7 +90,7 @@ def loadHistograms(input_file,pseudo,pseudo15):
 	# Output 	- list of passing histograms (in hard coded order)							#
 	#			- list of failing histograms (in hard coded order)							#
 	#																						#
-	# NOTE																					#
+	# NOTE1																					#
 	# I (Lucas) don't like how this is done because it's relying on ambigous codes (0,1,2)	#
 	# to determine what scale factors to apply - making it hard to quickly know what		#
 	# you're doing and to explain it to someone else. 										#
@@ -115,17 +119,7 @@ def loadHistograms(input_file,pseudo,pseudo15):
 	scaleHists(lHF2,1,2)
 	print 'zqq_fail ', lHF2.Integral()
 	
-	# Append hists to list of all hists (initilized at beginning of this file)
-	# NOTE
-	# I (Lucas) also don't like this because it doesn't seem fHists gets used
-	# for anything!
-	fHists.append(lHP1)
-	fHists.append(lHF1)
-	fHists.append(lHP2)
-	fHists.append(lHF2)
-
-
-	input_file.cd() # NOTE - pretty sure this is unnecessary
+	input_file.cd()
 	
 	# Grab (no scale) the third group (qcd MC)
 	lHP3 = input_file.Get("qcd_pass")
@@ -140,19 +134,13 @@ def loadHistograms(input_file,pseudo,pseudo15):
 	lHF4 = input_file.Get("tqq_fail")
 	lHF4.Scale(1./(1-0.1*0.17))
 	# Also have to do top pT dependent SF
-	# NOTE - I (Lucas) also don't like how this is hardcoded in
+	# NOTE2 - I (Lucas) also don't like how this is hardcoded in
 	scale=[1.0,0.8,0.75,0.7,0.6,0.5,0.5]
 	for i0 in range(1,lHF4.GetNbinsX()+1):
 		for i1 in range(1,lHF4.GetNbinsY()+1):
 			lHP4.SetBinContent(i0,i1,lHP4.GetBinContent(i0,i1)*scale[i1])
 			lHF4.SetBinContent(i0,i1,lHF4.GetBinContent(i0,i1)*scale[i1])
 	print 'tqq_pass 2 ', lHP4.Integral()
-	
-	# Append hists to list of all hists again... though why?
-	fHists.append(lHP3)
-	fHists.append(lHF3)
-	fHists.append(lHP4)
-	fHists.append(lHF4)
 
 	# From documentation:
 	# By default when an histogram is created, it is added to the list of histogram objects in the current directory in memory.
@@ -206,11 +194,8 @@ def loadHistograms(input_file,pseudo,pseudo15):
 
 	# Put each scaled histogram in the output lists
 	# Extend just appends each item in the list argument to the list it's called on
-	# NOTE - This can be reduced to two lines
-	hpass.extend([lHP0,lHP1,lHP2])
-	hfail.extend([lHF0,lHF1,lHF2])
-	hpass.extend([lHP3,lHP4])
-	hfail.extend([lHF3,lHF4])
+	hpass.extend([lHP0,lHP1,lHP2,lHP3,lHP4])
+	hfail.extend([lHF0,lHF1,lHF2,lHF3,lHF4])
 
 	# Now time to do the signals
 	# Same idea - grab, scale, setdirectory, append - except these get initialized DIRECTLY to the output lists
@@ -222,12 +207,10 @@ def loadHistograms(input_file,pseudo,pseudo15):
 		scaleHists(hfail[len(hfail)-1],1,2)
 		hpass[len(hpass)-1].SetDirectory(0)
 		hfail[len(hfail)-1].SetDirectory(0)
-		fHists.append(hpass[len(hpass)-1])
-		fHists.append(hfail[len(hfail)-1])
 
 	# Quick print to debug
 	for lH in (hpass+hfail):
-		lH.SetDirectory(0)	# NOTE - again?
+		lH.SetDirectory(0)
 		print lH.GetName(), lH.Integral()
 
 	# Done
@@ -240,7 +223,7 @@ def scaleHists(iHist,iType,iPassId):
 	# outputs that hist scaled by the value determined 		#
 	# the type and pass ID. 								#
 	# -----------------------------------------------------	#
-	# NOTE 													#
+	# NOTE4													#
 	# I'm not going to try to parse through this because 	#
 	# I plan to totally replace it.							#
 	#########################################################
@@ -290,7 +273,7 @@ class dazsleRhalphabetBuilder:
 		self._poly_lNR = 4; # 4th order in rho
 
 
-		# define RooRealVars - NOTE - 'l' denotes what? Not Roo object since 'p' is used later on
+		# define RooRealVars - NOTE3 - 'l' denotes what? Not Roo object since 'p' is used later on
 		#---------------------------------------------------#
 		# RooRealVar 		-> Variable 	x 				#
 		# RooAbsReal 		-> Function 	f(x) 			#
@@ -301,14 +284,13 @@ class dazsleRhalphabetBuilder:
 		# RooAbsData 		-> list of space points			#
 		#---------------------------------------------------#
 
-		# NOTE - MSD = soft drop mass?
 		self._lMSD    = r.RooRealVar("x","x",self._mass_lo,self._mass_hi)
 		self._lMSD.setBins(self._mass_nbins)		
 		self._lPt     = r.RooRealVar("pt","pt",self._pt_lo,self._pt_hi);
 		self._lPt.setBins(self._pt_nbins)
 		self._lRho    = r.RooFormulaVar("rho","log(x*x/pt/pt)",r.RooArgList(self._lMSD,self._lPt))
 
-		# NOTE - Cris is pretty sure that these efficiencies can be done away with - they get used but not
+		# NOTE5 - Cris is pretty sure that these efficiencies can be done away with - they get used but not
 		#		 for anything that gets saved out.
 		self._lEff    = r.RooRealVar("veff"      ,"veff"      ,0.5 ,0.,1.0)
 		self._lEffQCD = r.RooRealVar("qcdeff"    ,"qcdeff"    ,0.1 ,0.,1.0)
@@ -322,7 +304,7 @@ class dazsleRhalphabetBuilder:
 
 		self.LoopOverPtBins();
 
-	# NOTE - Definition of this function is totally unnecessary. The code here can all be put into __init__ and it would change nothing
+	# Keeping this as a separate function rather than merging with __init__ to separate the 'defining' from the 'doing' 
 	def LoopOverPtBins(self):
 
 		print "number of pt bins = ", self._pt_nbins;
@@ -334,9 +316,9 @@ class dazsleRhalphabetBuilder:
 			hpass_inPtBin = [];
 			hfail_inPtBin = [];
 
-			# NOTE - This block is important because it starts to define the naming scheme kept throughout the code.
+			# NOTE0 - This block is important because it starts to define the naming scheme kept throughout the code.
 			# Specifically, the pt bins are called 'cat's and are given an index based on the bin number.
-			# Each 'cat' corresponds to a different process/set and that order is hard coded in
+			# Each 'cat' corresponds to a different process/set and that order is hard coded in.
 			# I (Lucas) don't like this because I can't just look at it and know the pt bin walls
 			# However, this is pretty ingrained in the code and would take a decent chunk of work to change
 			# correctly for very little reward. Will probably leave it.
@@ -350,7 +332,6 @@ class dazsleRhalphabetBuilder:
 
 				# Remove low mass and high mass (cat 1 if m>185, cat 2 if m>220 or m<50, cat 3 if m>260 or m<55, cat4 if m>310 or m<65, cat5 if m<65)
 				# NOTE - not sure why this for loop is necessary
-				# tmp = temporary
 				for i0 in range(1,self._mass_nbins+1):
 					if ((i0 > 31 or i0 < 0) and ipt == 1) or ((i0 > 38 or i0 < 4) and ipt == 2) or ((i0 > 46 or i0 < 5) and ipt == 3) or ((i0 > 56 or i0 < 7) and ipt == 4) or (i0 < 7 and ipt == 5):
 						tmppass_inPtBin.SetBinContent(i0,0);
@@ -376,7 +357,7 @@ class dazsleRhalphabetBuilder:
 			(thisDatas,thisPdfs,thisHists) = self.workspaceInputs(hpass_inPtBin,hfail_inPtBin,"cat"+str(ipt))
 			
 			# Get approximate pt bin value
-			# NOTE - Pt falls exponentially so the mean of the bin is left of the center of the bin! Need to change this since I'm going to used Mtw, not pt
+			# NOTE3 - Pt falls exponentially so the mean of the bin is left of the center of the bin! Need to change this since I'm going to used Mtw, not pt
 			approx_pt = self._hpass[0].GetYaxis().GetBinLowEdge(ipt)+self._hpass[0].GetYaxis().GetBinWidth(ipt)*0.3;
 			
 
@@ -684,14 +665,14 @@ class dazsleRhalphabetBuilder:
 				# Set the mass for the process
 				if process == "wqq": mass = 80.;
 				elif process == "zqq": mass = 91.;
-				elif process == "tqq": mass = 80.;	# NOTE - this should never occur based in the prior if statement
+				# elif process == "tqq": raw_input('AHHH TQQ CALLED');	this should never occur based on the prior if statement
 				else: mass = float(process[3:])
 
 				# get the matched and unmatched hist
-				tmph_matched = self._inputfile.Get(process+"_"+cat+"_matched");			# NOTE - need to match this naming scheme
+				tmph_matched = self._inputfile.Get(process+"_"+cat+"_matched");			# NOTE4 - need to match this naming scheme
 				tmph_unmatched = self._inputfile.Get(process+"_"+cat+"_unmatched");
 				
-				# NOTE - Again, going to scale with these ambiguous codes. Will change this.
+				# NOTE4 - Again, going to scale with these ambiguous codes. Will change this.
 				procid = 0 if "wqq" in process else 1
 				passid = 1 if "pass" in cat    else 2 
 				# scale unmatched and matched hists only once
@@ -699,7 +680,7 @@ class dazsleRhalphabetBuilder:
 					scaleHists(tmph_matched,procid,passid)
 					scaleHists(tmph_unmatched,procid,0)#passid)
 				
-				# NOTE - Variable names and hists grabbed do not match!!! Possibly a fix for something?
+				# NOTE4 - Variable names and hists grabbed do not match!!! Possibly a fix for something?
 				if process == "tqq":
 					tmph_matched = self._inputfile.Get(process+"_"+cat+"_unmatched");
 					tmph_unmatched = self._inputfile.Get(process+"_"+cat+"_matched");

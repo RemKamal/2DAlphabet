@@ -8,8 +8,13 @@ Full comments in buildRhalphabet.py added. Any comment starting with `NOTE` is s
 
 | Old | New |
 |-----|-----|
-| f | input_file |
-|self._nptbins | self._pt_nbins |
-|pPt | approx_pt |
+| `f` | `input_file` |
+|`self._nptbins` | `self._pt_nbins` |
+|`pPt` | `approx_pt` |
+| `if i1 == 0:`									| `if i1 == 0:` |
+|	`pVal  = math.pow(10,-i1-min(int(i0*0.5),1))` |	`pVal  = math.pow(10,-min(int(i0*0.5),1))` |
+| `hpass.extend([lHP0,lHP1,lHP2])` <br> `hfail.extend([lHF0,lHF1,lHF2])` <br> `hpass.extend([lHP3,lHP4])` <br> `hfail.extend([lHF3,lHF4])` | `hpass.extend([lHP0,lHP1,lHP2,lHP3,lHP4])` <br> `hfail.extend([lHF0,lHF1,lHF2,lHF3,lHF4])` |
+| `elif process == "tqq": mass = 80.;` | --- |
 
-Some reordering for my own sanity
+* Removed `fHists` since it wasn't being used for anything
+* Some reordering for my own sanity
