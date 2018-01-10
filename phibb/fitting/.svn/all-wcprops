@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/DAZSLE/ZPrimePlusJet/!svn/ver/737/branches/phibb/fitting
+END
+fit_fullralph.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/fit_fullralph.py
+END
+ralphabase.root
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ralphabase.root
+END
+card.txt
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/card.txt
+END
+tools.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/tools.py
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/README.md
+END
+hist.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/hist.py
+END
+hists_1D.root
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/hists_1D.root
+END
+tdrstyle.py
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/tdrstyle.py
+END
+rootlogon.C
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/rootlogon.C
+END
+test.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/test.py
+END
+HSR_create.py
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/HSR_create.py
+END
+rhalphabet_builder.py
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/665/branches/phibb/fitting/rhalphabet_builder.py
+END
+fit.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/fit.py
+END
+rhalphabet_builder_Phibb.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/DAZSLE/ZPrimePlusJet/!svn/ver/737/branches/phibb/fitting/rhalphabet_builder_Phibb.py
+END
+testphil.root
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/testphil.root
+END
+plotPostfit.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/plotPostfit.py
+END
+card_hist.txt
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/card_hist.txt
+END

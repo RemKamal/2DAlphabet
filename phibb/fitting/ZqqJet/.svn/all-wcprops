@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet
+END
+buildRhalphabet.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/buildRhalphabet.py
+END
+fullLims_1cat.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/fullLims_1cat.py
+END
+limitbias3.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/limitbias3.py
+END
+card_rhalphabet_cat1.txt
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/card_rhalphabet_cat1.txt
+END
+cards_all_qcd.txt
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/cards_all_qcd.txt
+END
+card_rhalphabet_34_pt.txt
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/card_rhalphabet_34_pt.txt
+END
+card_rhalphabet_cat2.txt
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/card_rhalphabet_cat2.txt
+END
+card_rhalphabet_cat3.txt
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/card_rhalphabet_cat3.txt
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/README.md
+END
+card_rhalphabet_cat4.txt
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/card_rhalphabet_cat4.txt
+END
+mlfit.root
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/mlfit.root
+END
+card_rhalphabet_cat5.txt
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/card_rhalphabet_cat5.txt
+END
+datacard.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/datacard.tpl
+END
+plot.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/plot.py
+END
+limit.py
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/limit.py
+END
+datacard32.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/datacard32.tpl
+END
+datacard33.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/datacard33.tpl
+END
+tmpCard.txt
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/tmpCard.txt
+END
+diffNuisances.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/diffNuisances.py
+END
+datacard34.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/datacard34.tpl
+END
+cards_all_43.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/cards_all_43.txt
+END
+plotPt.py
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/plotPt.py
+END
+makeCards.py
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/makeCards.py
+END
+validateInputs.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/validateInputs.py
+END
+Zqq_create.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/Zqq_create.py
+END
+dumbFastLimits.sh
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/dumbFastLimits.sh
+END
+tdrstyle.py
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/tdrstyle.py
+END
+cards_all.txt
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/cards_all.txt
+END
+rootlogon.C
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/rootlogon.C
+END
+datacard23.tpl
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/datacard23.tpl
+END
+validateMLFit.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/DAZSLE/ZPrimePlusJet/!svn/ver/617/branches/phibb/fitting/ZqqJet/validateMLFit.py
+END

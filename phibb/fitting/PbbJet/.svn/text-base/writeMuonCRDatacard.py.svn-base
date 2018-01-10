@@ -1,0 +1,330 @@
+import ROOT as rt
+from multiprocessing import Process
+from optparse import OptionParser
+from operator import add
+import math
+import sys
+import time
+import array
+import os
+import re
+
+from buildRhalphabetPhibb import MASS_BINS,MASS_LO,MASS_HI,BLIND_LO,BLIND_HI
+from rhalphabet_builder_Phibb import BB_SF,BB_SF_ERR,V_SF,V_SF_ERR,GetSF
+
+from hist import *
+
+re_sbb = re.compile("Sbb(?P<mass>\d+)")
+
+def writeDataCard(boxes,txtfileName,sigs,bkgs,histoDict,options,jet_type):
+    obsRate = {}
+    for box in boxes:
+        obsRate[box] = histoDict['data_obs_%s'%box].Integral()
+    nBkgd = len(bkgs)
+    nSig = len(sigs)
+    rootFileName = txtfileName.replace('.txt','.root')
+
+    rates = {}
+    lumiErrs = {}
+    hqq125ptErrs = {}
+    mcStatErrs = {}
+    veffErrs = {}
+    bbeffErrs = {}
+    znormEWErrs = {}
+    znormQErrs = {}
+    wznormEWErrs = {}
+    mutriggerErrs = {}
+    muidErrs = {}
+    muisoErrs = {}
+    jesErrs = {}
+    jerErrs = {}
+    puErrs = {}
+    for proc in sigs+bkgs:
+        for box in boxes:
+            print proc, box
+            error = array.array('d',[0.0])
+            rate = histoDict['%s_%s'%(proc,box)].IntegralAndError(1,histoDict['%s_%s'%(proc,box)].GetNbinsX(),error)
+            rates['%s_%s'%(proc,box)]  = rate
+            lumiErrs['%s_%s'%(proc,box)] = 1.025
+            if proc=='hqq125':
+                hqq125ptErrs['%s_%s'%(proc,box)] = 1.3                
+            else:
+                hqq125ptErrs['%s_%s'%(proc,box)] = 1.0
+            if proc=='wqq' or proc=='zqq' or 'hqq' in proc:
+                veffErrs['%s_%s'%(proc,box)] = 1.0+V_SF_ERR[jet_type]/V_SF[jet_type]
+                if box=='pass':
+                    bbeffErrs['%s_%s'%(proc,box)] = 1.0+BB_SF_ERR[jet_type]/BB_SF[jet_type]
+                else:
+                    ratePass = histoDict['%s_%s'%(proc,'pass')].Integral()
+                    rateFail = histoDict['%s_%s'%(proc,'fail')].Integral()
+                    if rateFail>0:
+                        bbeffErrs['%s_%s'%(proc,box)] = 1.0-BB_SF_ERR[jet_type]*(ratePass/rateFail)
+                    else:
+                        bbeffErrs['%s_%s'%(proc,box)] = 1.0
+                    
+            else:
+                veffErrs['%s_%s'%(proc,box)] = 1.
+                bbeffErrs['%s_%s'%(proc,box)] = 1.
+            mutriggerErrs['%s_%s'%(proc,box)] = 1
+            muidErrs['%s_%s'%(proc,box)] = 1
+            muisoErrs['%s_%s'%(proc,box)] = 1
+            #jesErrs['%s_%s'%(proc,box)] = 1
+            #jerErrs['%s_%s'%(proc,box)] = 1
+            if proc=='wqq':
+                wznormEWErrs['%s_%s'%(proc,box)] = 1.05
+            else:
+                wznormEWErrs['%s_%s'%(proc,box)] = 1.
+            if proc=='zqq' or proc=='wqq':
+                znormQErrs['%s_%s'%(proc,box)] = 1.1
+                znormEWErrs['%s_%s'%(proc,box)] = 1.15
+            else:
+                znormQErrs['%s_%s'%(proc,box)] = 1.
+                znormEWErrs['%s_%s'%(proc,box)] = 1.
+                
+            if rate>0:
+                mcStatErrs['%s_%s'%(proc,box)] = 1.0+(error[0]/rate)
+            else:
+                mcStatErrs['%s_%s'%(proc,box)] = 1.0
+                
+            if rate>0:
+                rateJESUp = histoDict['%s_%s_JESUp'%(proc,box)].Integral()
+                rateJESDown = histoDict['%s_%s_JESDown'%(proc,box)].Integral()
+                rateJERUp = histoDict['%s_%s_JERUp'%(proc,box)].Integral()
+                rateJERDown = histoDict['%s_%s_JERDown'%(proc,box)].Integral()
+                ratePuUp = histoDict['%s_%s_PuUp'%(proc,box)].Integral()
+                ratePuDown = histoDict['%s_%s_PuDown'%(proc,box)].Integral()
+                jesErrs['%s_%s'%(proc,box)] =  1.0+(abs(rateJESUp-rate)+abs(rateJESDown-rate))/(2.*rate)   
+                jerErrs['%s_%s'%(proc,box)] =  1.0+(abs(rateJERUp-rate)+abs(rateJERDown-rate))/(2.*rate)
+                puErrs['%s_%s'%(proc,box)] =  1.0+(abs(ratePuUp-rate)+abs(ratePuDown-rate))/(2.*rate)
+            else:
+                jesErrs['%s_%s'%(proc,box)] =  1.0
+                jerErrs['%s_%s'%(proc,box)] =  1.0
+                puErrs['%s_%s'%(proc,box)] =  1.0
+
+    divider = '------------------------------------------------------------\n'
+    datacard = 'imax 2 number of channels\n' + \
+       'jmax * number of processes minus 1\n' + \
+      'kmax * number of nuisance parameters\n' + \
+      divider + \
+      'bin fail_muonCR pass_muonCR\n' + \
+      'observation %.3f %.3f\n'%(obsRate['fail'],obsRate['pass']) + \
+      divider + \
+      'shapes * pass_muonCR %s w_muonCR:$PROCESS_pass w_muonCR:$PROCESS_pass_$SYSTEMATIC\n'%rootFileName + \
+      'shapes * fail_muonCR %s w_muonCR:$PROCESS_fail w_muonCR:$PROCESS_fail_$SYSTEMATIC\n'%rootFileName + \
+      divider
+    binString = 'bin'
+    processString = 'process'
+    processNumberString = 'process'
+    rateString = 'rate'
+    lumiString = 'lumi\tlnN'
+    hqq125ptString = 'hqq125pt\tlnN'
+    veffString = 'veff\tlnN'
+    bbeffString = 'bbeff\tlnN'
+    znormEWString = 'znormEW\tlnN'
+    znormQString = 'znormQ\tlnN'    
+    wznormEWString = 'wznormEW\tlnN'
+    muidString = 'muid\tshape'   
+    muisoString = 'muiso\tshape'   
+    mutriggerString = 'mutrigger\tshape'  
+    #jesString = 'JES\tshape'    
+    #jerString = 'JER\tshape'
+    jesString = 'JES\tlnN'
+    jerString = 'JER\tlnN'
+    puString = 'Pu\tlnN'
+    mcStatErrString = {}
+    if options.noMcStatShape:
+        for proc in sigs+bkgs:
+            for box in boxes:
+                mcStatErrString['%s_%s'%(proc,box)] = '%s%smuonCRmcstat\tlnN'%(proc,box)
+    else:
+        for key, histo in histoDict.iteritems():
+            if 'mcstat' in key and 'Up' in key: 
+                mcStatErrString[key] = key.split('_')[-1].replace('Up','') + '\tshape'
+            
+    for box in boxes:
+        i = -1
+        for proc in sigs+bkgs:
+            i+=1
+            if rates['%s_%s'%(proc,box)] <= 0.0: continue
+            binString +='\t%s_muonCR'%box
+            processString += '\t%s'%(proc)
+            processNumberString += '\t%i'%(i-nSig+1)
+            rateString += '\t%.3f' %rates['%s_%s'%(proc,box)]
+            lumiString += '\t%.3f'%lumiErrs['%s_%s'%(proc,box)]
+            hqq125ptString += '\t%.3f'%hqq125ptErrs['%s_%s'%(proc,box)]
+            veffString += '\t%.3f'%veffErrs['%s_%s'%(proc,box)]
+            bbeffString += '\t%.3f'%bbeffErrs['%s_%s'%(proc,box)]
+            znormEWString += '\t%.3f'%znormEWErrs['%s_%s'%(proc,box)]
+            znormQString += '\t%.3f'%znormQErrs['%s_%s'%(proc,box)]
+            wznormEWString += '\t%.3f'%wznormEWErrs['%s_%s'%(proc,box)]
+            mutriggerString += '\t%.3f'%mutriggerErrs['%s_%s'%(proc,box)]
+            muidString += '\t%.3f'%muidErrs['%s_%s'%(proc,box)]
+            muisoString += '\t%.3f'%muisoErrs['%s_%s'%(proc,box)]
+            jesString += '\t%.3f'%jesErrs['%s_%s'%(proc,box)]
+            jerString += '\t%.3f'%jerErrs['%s_%s'%(proc,box)]
+            puString += '\t%.3f'%puErrs['%s_%s'%(proc,box)]
+            for box1 in boxes:
+                for proc1 in sigs+bkgs:
+                    if proc1==proc and box1==box:
+                        if options.noMcStatShape: mcStatErrString['%s_%s'%(proc1,box1)] += '\t%.3f'% mcStatErrs['%s_%s'%(proc,box)]
+                    else:                        
+                        if options.noMcStatShape: mcStatErrString['%s_%s'%(proc1,box1)] += '\t-'
+            
+    for key, value in mcStatErrString.iteritems():
+        for box in boxes:
+            for proc in sigs+bkgs:
+                if rates['%s_%s'%(proc,box)] <= 0.0: continue
+                if re.match('%s_%s'%(proc,box),key):
+                    if not options.noMcStatShape: mcStatErrString[key] += '\t1.000'
+                else:
+                    if not options.noMcStatShape: mcStatErrString[key] += '\t-'                    
+                
+            
+    binString+='\n'; processString+='\n'; processNumberString+='\n'; rateString +='\n'; lumiString+='\n'; hqq125ptString+='\n';
+    veffString+='\n'; bbeffString+='\n'; znormEWString+='\n'; znormQString+='\n'; wznormEWString+='\n'; mutriggerString+='\n'; muidString+='\n'; muisoString+='\n'; 
+    jesString+='\n'; jerString+='\n'; puString+='\n';     
+    for key, value in mcStatErrString.iteritems():   
+        mcStatErrString[key] += '\n'
+            
+    datacard+=binString+processString+processNumberString+rateString+divider
+
+    # now nuisances
+    datacard+=lumiString+hqq125ptString+veffString+bbeffString+znormEWString+znormQString+wznormEWString+mutriggerString+muidString+muisoString+jesString+jerString+puString
+
+    for proc in (sigs+bkgs):
+        for box in boxes:
+            if rates['%s_%s'%(proc,box)] <= 0.0: continue            
+            for key, value in mcStatErrString.iteritems():
+                if re.match('%s_%s'%(proc,box),key):
+                    datacard += mcStatErrString[key]
+
+    # now top rate params
+    tqqeff = histoDict['tqq_pass'].Integral()/(histoDict['tqq_pass'].Integral()+histoDict['tqq_fail'].Integral())
+
+    
+    datacard+='tqqpassmuonCRnorm rateParam pass_muonCR tqq (@0*@1) tqqnormSF,tqqeffSF\n' + \
+        'tqqfailmuonCRnorm rateParam fail_muonCR tqq (@0*(1.0-@1*%.4f)/(1.0-%.4f)) tqqnormSF,tqqeffSF\n'%(tqqeff,tqqeff) + \
+        'tqqnormSF extArg 1.0 [0.0,10.0]\n' + \
+        'tqqeffSF extArg 1.0 [0.0,10.0]\n'
+
+    txtfile = open(options.odir+'/'+txtfileName,'w')
+    txtfile.write(datacard)
+    txtfile.close()
+
+    
+def main(options, args):
+    
+    boxes = ['pass', 'fail']
+    #for Hbb extraction:
+    sigs = ['DMSbb'+str(options.mass)]
+    bkgs = ['zqq','wqq','qcd','tqq','vvqq','stqq','wlnu','zll','tthqq125','whqq125','hqq125','zhqq125','vbfhqq125']
+    #for Wqq/Zbb extraction:
+    #sigs = ['zqq','wqq']
+    #bkgs = ['tthqq125','whqq125','hqq125','zhqq125','vbfhqq125','qcd','tqq','vvqq','stqq','wlnu','zll']
+    #for just Zbb extraction:
+    #sigs = ['zqq']
+    #bkgs = ['tthqq125','whqq125','hqq125','zhqq125','vbfhqq125','qcd','tqq','wqq','vvqq','stqq','wlnu','zll']
+    systs = ['JER','JES','mutrigger','muid','muiso','Pu']
+    cut = options.cuts.split(',')[0] # just take first cut
+
+    jet_type = 'AK8'
+    if options.fillCA15:
+        jet_type = 'CA15'
+    tfile = rt.TFile.Open(options.idir+'/hist_1DZbb_muonCR_' + jet_type + '_interpolations_merge_rebin.root','read')
+    
+    histoDict = {}
+    datahistDict = {}
+    adjProc = {}
+    
+    keys = [key.GetName() for key in tfile.GetListOfKeys() if 'Sbb' in key.GetName()]
+    re_matches = [re_sbb.search(key) for key in keys]
+    masses_present = sorted(list(set([int(re_match.group("mass")) for re_match in re_matches])))
+    mass = int(options.mass)
+    deltaM = [abs(m - mass) for m in masses_present]
+    adjMass = masses_present[deltaM.index(min(deltaM))]
+    # fix process for signal
+    adjProc['DMSbb'+str(options.mass)] = 'DMSbb'+str(adjMass)
+    # keep process for everything else
+    for proc in (bkgs+['data_obs']):
+        adjProc[proc] = proc
+    
+    for proc in (bkgs+sigs+['data_obs']):
+        for box in boxes:
+            print 'getting histogram for process: %s_%s'%(proc,box)
+            histoDict['%s_%s'%(proc,box)] = tfile.Get('%s_%s_%s'%(adjProc[proc],cut,box)).Clone()
+            histoDict['%s_%s'%(proc,box)].Scale(GetSF(proc,cut,box,tfile, jet_type = jet_type))
+            #if proc=='qcd': histoDict['%s_%s'%(proc,box)].Scale(0.63)
+            for i in range(1, histoDict['%s_%s'%(proc,box)].GetNbinsX()+1):
+                massVal = histoDict['%s_%s'%(proc,box)].GetXaxis().GetBinCenter(i)
+                
+            for syst in systs:
+                if proc!='data_obs':
+                    print 'getting histogram for process: %s_%s_%s_%sUp'%(proc,cut,box,syst)
+                    histoDict['%s_%s_%sUp'%(proc,box,syst)] = tfile.Get('%s_%s_%s_%sUp'%(adjProc[proc],cut,box,syst)).Clone()
+                    histoDict['%s_%s_%sUp'%(proc,box,syst)].Scale(GetSF(proc,cut,box,tfile, jet_type = jet_type))
+                    #if proc=='qcd': histoDict['%s_%s_%sUp'%(proc,box,syst)].Scale(0.63)
+                    print 'getting histogram for process: %s_%s_%sDown'%(proc,box,syst)
+                    histoDict['%s_%s_%sDown'%(proc,box,syst)] = tfile.Get('%s_%s_%s_%sDown'%(adjProc[proc],cut,box,syst)).Clone()
+                    histoDict['%s_%s_%sDown'%(proc,box,syst)].Scale(GetSF(proc,cut,box,tfile, jet_type = jet_type))
+                    #if proc=='qcd': histoDict['%s_%s_%sDown'%(proc,box,syst)].Scale(0.63)
+            if proc!='data_obs':
+                histoDict['%s_%s_%sUp'%(proc,box,'mcstat')] = histoDict['%s_%s'%(proc,box)].Clone('%s_%s_%sUp'%(proc,box,'mcstat'))
+                histoDict['%s_%s_%sDown'%(proc,box,'mcstat')] = histoDict['%s_%s'%(proc,box)].Clone('%s_%s_%sDown'%(proc,box,'mcstat'))
+                for i in range(1, histoDict['%s_%s'%(proc,box)].GetNbinsX() + 1):
+                    mcstatup = histoDict['%s_%s'%(proc,box)].GetBinContent(i) + histoDict['%s_%s'%(proc,box)].GetBinError(i)
+                    mcstatdown = max(0.,histoDict['%s_%s'%(proc,box)].GetBinContent(i) - histoDict['%s_%s'%(proc,box)].GetBinError(i))
+                    histoDict['%s_%s_%sUp'%(proc,box,'mcstat')].SetBinContent(i, mcstatup)
+                    histoDict['%s_%s_%sDown'%(proc,box,'mcstat')].SetBinContent(i, mcstatdown)
+
+    uncorrelate(histoDict, 'mcstat', suppressLevel=0.5)
+    newHistoDict = {}
+    for key, histo in histoDict.iteritems():
+        if 'mcstat' in key:
+            proc = key.split('_')[0]
+            box = key.split('_')[1]
+            newHistoDict[key.replace('mcstat','%s%smcstat'%(proc,box))] = histoDict[key]
+        else:
+            newHistoDict[key] = histoDict[key]
+    histoDict = newHistoDict
+                            
+    
+    outFile = 'datacard_muonCR.root'
+    
+    outputFile = rt.TFile.Open(options.odir+'/'+outFile,'recreate')
+    outputFile.cd()
+    w = rt.RooWorkspace('w_muonCR')
+    #w.factory('y[40,40,201]')
+    #w.var('y').setBins(1)
+    w.factory('x[%i,%i,%i]'%(MASS_LO,MASS_LO,MASS_HI))
+    w.var('x').setBins(MASS_BINS)
+    for key, histo in histoDict.iteritems():
+        #histo.Rebin(23)
+        #ds = rt.RooDataHist(key,key,rt.RooArgList(w.var('y')),histo)
+        ds = rt.RooDataHist(key,key,rt.RooArgList(w.var('x')),histo)
+        getattr(w,'import')(ds, rt.RooCmdArg())
+    w.Write()
+    outputFile.Close()
+    txtfileName = outFile.replace('.root','.txt')
+
+    writeDataCard(boxes,txtfileName,sigs,bkgs,histoDict,options,jet_type)
+    print '\ndatacard:\n'
+    os.system('cat %s/%s'%(options.odir,txtfileName))
+
+
+
+if __name__ == '__main__':
+    parser = OptionParser()
+    parser.add_option('-b', action='store_true', dest='noX', default=False, help='no X11 windows')
+    parser.add_option('--lumi', dest='lumi', type=float, default = 20,help='lumi in 1/fb ', metavar='lumi')
+    parser.add_option('-i','--idir', dest='idir', default = './',help='directory with data', metavar='idir')
+    parser.add_option('-o','--odir', dest='odir', default = './',help='directory to write cards', metavar='odir')
+    parser.add_option('--lrho', dest='lrho', default=-6.0, type= 'float', help='low value rho cut')
+    parser.add_option('--hrho', dest='hrho', default=-2.1, type='float', help=' high value rho cut')
+    parser.add_option('-c', '--cuts', dest='cuts', default='p9', type='string', help='double b-tag cut value')
+    parser.add_option('-m', '--mass', dest='mass', default='50', type='string', help='mass value')
+    parser.add_option('--fillCA15', action='store_true', dest='fillCA15', default =False,help='for CA15', metavar='fillCA15')
+    parser.add_option('--no-mcstat-shape', action='store_true', dest='noMcStatShape', default =False,help='change mcstat uncertainties to lnN', metavar='noMcStatShape')
+
+    (options, args) = parser.parse_args()
+
+    main(options, args)

@@ -1,0 +1,16 @@
+1. Not standalone. Need to initialize instance of class and call run()
+2. Derives QCD efficiency on each run
+3. Define background and signal names in __init__
+4. Uses dictionaries in LoopOverPtBins
+5. workspaceInputs -> GetWorkspaceInputs
+6. LoadHistograms is totally different
+* More inputs
+* Dictionaries 
+7. Removed scaleHists (which I wanted to do)
+8. buildPolynomialArray changed
+* no longer reads in 'guesses' from previous run
+* pVal -> start (but not used?)
+9. buildRooPolyArray does Pt/mass instead of Pt/rho (buildRooPolyRhoArray does Pt/rho)
+10. lPass -> roopolyarray
+11. rooTheHistFunc -> GetRooHistFitObjects
+12. No signal interpolation in MakeWorkspace
