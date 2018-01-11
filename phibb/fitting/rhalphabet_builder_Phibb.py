@@ -109,6 +109,7 @@ class RhalphabetBuilder():
         print "number of mass bins and lo/hi: ", self._mass_nbins, self._mass_lo, self._mass_hi;
         print " Rho : ", " Low : ", self._rho_lo, " High : ", self._rho_hi
         print " DBTAG CUT : ", self._cuts[0] 
+        
         # polynomial order for fit
         self._poly_degree_rho = nr #1 = linear ; 2 is quadratic
         self._poly_degree_pt = np #1 = linear ; 2 is quadratic
@@ -371,14 +372,14 @@ class RhalphabetBuilder():
             # make RooDataset, RooPdfs, and histograms
             # GetWorkspaceInputs returns: RooDataHist (data), then RooHistPdf of each electroweak
 
-            #  -----------------
+            #  --------------------
             # | GetWorkspaceInputs |
-            #  -----------------
+            #  --------------------
+            # Creates the RooFit objects that will be used to build the workspace
             # Input passing and fail histograms for this pt bin and the pt category name string
             # Ouput three lists
             # - Data pass and fail as RooDataHists
-            # - totp, totf, ewkp, and ewkf as RooAddPdfs
-            # - All MC pass and fail as RooDataHists 
+            # - Pass and fail dictionaries for each sample's RooDataHists
             (data_pass_rdh, data_fail_rdh, pass_rhps, fail_rhps) = self.GetWorkspaceInputs(pass_hists_ptbin, fail_hists_ptbin,"cat"+str(pt_bin))
             #Get approximate pt bin value
             this_pt = self._pass_hists["data_obs"].GetYaxis().GetBinLowEdge(pt_bin)+self._pass_hists["data_obs"].GetYaxis().GetBinWidth(pt_bin)*0.3;
@@ -476,8 +477,8 @@ class RhalphabetBuilder():
             #  ------------------------
             # | buildRooPoly(Rho)Array |
             #  ------------------------
-            # Creates the RooPolyVar (basically a polynomial function) for this pt bin in either mass or rho
-            # Input value of pt and mass/rjp RooVars, unity constant (1), zero constant (0), and the polynomial array 
+            # Creates the RooPolyVar (basically a polynomial function) for this pt,mass bin in either mass or rho
+            # Input value of pt and mass/rho RooVars, unity constant (1), zero constant (0), and the polynomial array 
             # Output is a 2D RooPolyVar
             # NOTE - buildRooPolyArray and buildRooPolyRhoArray are nearly identical - they just swap mass and rho
             #        for the second dimension so combine knows what to float (the polynomial coefficients stay the same)
@@ -566,7 +567,7 @@ class RhalphabetBuilder():
         fail_norm.Print()        
         self._all_shapes.extend([pass_rparh,fail_rparh,pass_norm,fail_norm])
 
-        # Now write the wrokspace with the RooParamHist
+        # Now write the workspace with the RooParamHist
         pass_workspace = r.RooWorkspace("w_pass_"+str(category))
         fail_workspace = r.RooWorkspace("w_fail_"+str(category))
         getattr(pass_workspace,'import')(pass_rparh,r.RooFit.RecycleConflictNodes())    # This just imports objects into the workspace and 
@@ -593,7 +594,7 @@ class RhalphabetBuilder():
         # Creates the RooPolyVar (basically a polynomial function) for this pt  #
         # bin given the input RooVars and polyarray (iVars) (Pt/mass)           #
         # --------------------------------------------------------------------- #
-        # Input     - pt and mass RooVars                                        #
+        # Input     - pt and mass RooVars                                       #
         #           - unity constant (1)                                        #
         #           - zero constant (0)                                         #
         #           - polynomial coefficent array                               #
@@ -1544,10 +1545,27 @@ def LoadHistograms(f, pseudo, blind, useQCD, scale, r_signal, mass_range, blind_
 
 def GetSF(process, cut, cat, f, fLoose=None, removeUnmatched=False, iPt=-1, jet_type='AK8'):    
     
+    #####################################################################
+    # Get SF based on process, file, match, pt, and jet type            #
+    # ----------------------------------------------------------------- #
+    # Input     - process (string)                                      #
+    #           - cut (string)                                          #
+    #           - catagory (string)                                     #
+    #           - input file                                            #
+    #           - loose input file                                      #
+    #           - Boolean to remove unmatched                           #
+    #           - Pt (string)                                           #
+    #           - jet type (string)                                     #
+    #                                                                   #
+    # Output    - Scale factor to apply                                 #
+    #####################################################################
+
     SF = 1
     adjProc = process
-        
+    
+    # If looking at DMSbb...    
     if 'DMSbb' in process:
+        # Setup Tgraph with SFs per mass point
         tgraph = r.TGraph(8)
         tgraph.SetPoint(0,  50, 0.8 * 1.574e-02)
         tgraph.SetPoint(1, 100, 0.8 * 1.526e-02)
@@ -1558,48 +1576,74 @@ def GetSF(process, cut, cat, f, fLoose=None, removeUnmatched=False, iPt=-1, jet_
         tgraph.SetPoint(6, 400, 0.8 * 1.144e-02)
         tgraph.SetPoint(7, 500, 0.8 * 7.274e-03)
         
+        # Grab the scale factor based on the mass and process
         re_match = re_sbb.search(process)
         mass = int(re_match.group("mass"))
         SF *= tgraph.Eval(mass,0,'S')
         
+        # Get a list of all Sbb keys
         keys = [key.GetName() for key in f.GetListOfKeys() if 'Sbb' in key.GetName()]
+        # Get re_sbb list corresponding to keys
         re_matches = [re_sbb.search(key) for key in keys]
+        # Sort the masses
         masses_present = sorted(list(set([int(re_match.group("mass")) for re_match in re_matches])))
+        # Get mass difference list
         deltaM = [abs(m - mass) for m in masses_present]
+        # Assign the mass from present mass that has the smallest mass difference from 'mass' to adjMass
         adjMass = masses_present[deltaM.index(min(deltaM))]
         # fix process for signal
         adjProc = 'DMSbb'+str(adjMass)
 
+    # If looking at hqq, zqq, pbb, or sbb...
     if 'hqq' in process or 'zqq' in process or 'Pbb' in process or 'Sbb' in process:
+        # If pass...
         if 'pass' in cat:
+            # Debug
             if 'Sbb' in process:
                 print process, cat, BB_SF[jet_type], jet_type
                 #sys.exit()
+            # Multiply SF by BB SF for jet type
             SF *= BB_SF[jet_type]            
             if 'zqq' in process:
                 print BB_SF[jet_type]
+        # If fail...
         else:
+            # Get pass and fail integrals
             passInt = f.Get(adjProc + '_' + cut + '_pass').Integral()
             failInt = f.Get(adjProc + '_' + cut + '_fail').Integral()
+            # Multiply by 1 + (1-BB_SF)*Rp/f
             if failInt > 0:
                 SF *= (1. + (1. - BB_SF[jet_type]) * passInt / failInt)
                 if 'zqq' in process:
                     print (1. + (1. - BB_SF[jet_type]) * passInt / failInt)
+    
+    # If looking at wqq, zqq, hqq, pbb, or sbb
     if 'wqq' in process or 'zqq' in process or 'hqq' in process or 'Pbb' in process or 'Sbb' in process:
+        # Apply V_SF
         SF *= V_SF[jet_type]
         if 'zqq' in process:
             print V_SF[jet_type]
+
+    # Call for 'matched' if needed
     matchingString = ''
     if removeUnmatched and ('wqq' in process or 'zqq' in process):
         matchingString = '_matched'
+
+    # If using loose file and wqq or zqq and pass
     if fLoose is not None and ('wqq' in process or 'zqq' in process) and 'pass' in cat:
+        # If pt is not specified...
         if iPt > -1:
+            # Get regular file and loose file integrals for pass
             nbinsX = f.Get(process + '_pass' + matchingString).GetXaxis().GetNbins()
             passInt = f.Get(process + '_pass' + matchingString).Integral(1, nbinsX, int(iPt), int(iPt))
             passIntLoose = fLoose.Get(process + '_pass' + matchingString).Integral(1, nbinsX, int(iPt), int(iPt))
+        # Else if pt is specified...
         else:
+            # Get regular file and loose file integrals for pass
             passInt = f.Get(process + '_pass' + matchingString).Integral()
             passIntLoose = fLoose.Get(process + '_pass' + matchingString).Integral()
+        
+        # Multiply SF by the ratio of file/loose_file
         SF *= passInt/passIntLoose
         if 'zqq' in process:
             print passInt/passIntLoose

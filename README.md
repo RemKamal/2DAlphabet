@@ -1,7 +1,27 @@
 # README
 This code is copied from [here](https://github.com/DAZSLE/ZPrimePlusJet/tree/zqqjet2016/fitting/ZqqJet) and will be developed for use in the b* all-hadronic analysis. I will keep change logs here as I commit.
 
+## How Ralphabet Builder Works (Phibb version)
+1. Before beginning, one must input a single root file which contains all of the 2D histograms that will be analyzed. Their names should follow the syntax 'process_cut_cat'+matchString where cat is either pass or fail and matchString = '_matched' or ''.
+2. The LoadHistograms() function can then be used to load, scale, and organize the histograms from this file and store them in two dictionaries - one for pass and one for fail.
+3. Now you can initialize an instance of the RhalphabetBuilder() class with the input file and newly created dictionaries as inputs and call the run() function to build rhalphabet.
+4. The run() function only calls LoopOverPtBins(). The following subpoints explain what happens for each pt bin.
+  a. Project the 2D pass/fail histograms onto their own 1D mass histograms for the pt bin.
+  b. Input these 1D mass histograms into GetWorkspaceInputs() which 'converts' non-signal MC and data to RooDataHists.
+  c. Call MakeRhalphabet() which estimates the QCD pass distribution for the pt bin and creates the RooParametricHists for pass and fail. Thus, both the pass and fail can float bin-by-bin in combine.
+    * In order to estimate the pass distribution, we build a RooPolyVar in (rho, pt) for this specific (mass,pt) bin and then do pass = fail * QCD_efficiency * polynomial.
+    * The fail distribution can float between its uncertainty and the polynomial can float given the initial coefficient values and bounds.
+  d. Call GetSignalInputs() to convert signal MC to RooDataHists (analog to GetWorkspaceInputs - these could be merged actually)
+  e. Call MakeWorkspace() to combine everything in this pt bin and write the final workspaces to the output file for combine to read.
+    * This includes getting the systematic histograms, scaling them, and projecting onto mass for this pt bin
+    * Also smears and shifts MC masses
+    * Finally, 'converts' systematics and smear and shift hists to RooDataHists and writes EVERYTHING to the final workspace
+
+
 ## Change Log
+
+### 1/11/18
+Full comments in rhalphabet_builder_Phibb.py. This will become the primary version now.
 
 ### 1/5/18
 Full comments in buildRhalphabet.py added. Any comment starting with `NOTE` is something that I'll have to come back to and/or resolve.
