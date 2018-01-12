@@ -8,24 +8,24 @@ shapes qcd  * ralphabase_34_pt.root w_$CHANNEL:$PROCESS_$CHANNEL
 bin          pass_cat1 fail_cat1
 observation -1         -1
 ------------------------------
-bin          pass_cat1	pass_cat1  pass_cat1 pass_cat1 pass_cat1 fail_cat1  fail_cat1  fail_cat1	fail_cat1   fail_cat1
-process      zqq100	wqq        zqq	  tqq   qcd       zqq100	  wqq        zqq	tqq   qcd
-process      0		1	   2   	     3   4      0	  1	     2		3 4
-rate         -1		-1         -1  	-1     1         -1	  -1	-1     -1		1
+bin              pass_cat1  pass_cat1  pass_cat1  pass_cat1  pass_cat1  fail_cat1  fail_cat1  fail_cat1  fail_cat1  fail_cat1
+process          zqq100     wqq        zqq        tqq        qcd        zqq100     wqq        zqq        tqq        qcd
+process          0          1          2          3          4          0          1          2          3          4
+rate             -1         -1         -1         -1         1          -1         -1         -1         -1         1
 --------------------------------
-lumi    lnN   1.023     1.023	1.023	- -	    1.023	  1.023	     1.023	- -
-scale   shape 0.03	0.03   	0.03   	-  	-        0.03	  0.03       0.03	- -
-smear   shape 1.0		1.0 	1.0     -   -        1.0		  1.0	     1.0	- -
-veff    lnN   0.91	0.91 	0.91    -   	-        1.006	  1.006	     1.006	- -
-znormQ  lnN   1.1	1.1 	1.1     -   	-        1.1    1.1	     1.1	- -
-znormE1  lnN   -		1.15 	1.15     -   -        -		  1.15	     1.15	- -
-wznormE1 lnN   -		1.05 	-        -   -        -		  1.05	     -	- -
-jecs    lnN  1.02   1.02    1.02   1.02  -   1.02   1.02    1.02   1.02  -
-trigger lnN  1.02   1.02    1.02   1.02  -   1.02   1.02    1.02   1.02  -
-muveto  lnN  1.005  1.005   1.005  1.005 -   1.005  1.005   1.005  1.005 -
-eveto   lnN  1.005  1.005   1.005  1.005 -   1.005  1.005   1.005  1.005 -
-ttnormSF lnN  -      -       -      1.1   -   -      -       -      1.1   -
-tteffSF  lnN  -      -       -      1.1   -   -      -       -      0.97   -
+lumi    lnN      1.023      1.023      1.023       -           -        1.023      1.023      1.023        -         -
+scale   shape    0.03       0.03       0.03        -           -        0.03       0.03       0.03         -         -
+smear   shape    1.0        1.0        1.0         -           -        1.0        1.0        1.0          -         -
+veff    lnN      0.91       0.91       0.91        -           -        1.006      1.006      1.006        -         -
+znormQ  lnN      1.1        1.1        1.1         -           -        1.1        1.1        1.1          -         -
+znormE1  lnN      -         1.15       1.15        -           -          -        1.15       1.15         -         -
+wznormE1 lnN      -         1.05        -          -           -          -        1.05         -          -         -
+jecs    lnN     1.02        1.02       1.02       1.02         -        1.02       1.02       1.02       1.02        -
+trigger lnN     1.02        1.02       1.02       1.02         -        1.02       1.02       1.02       1.02        -
+muveto  lnN     1.005       1.005      1.005      1.005        -        1.005      1.005      1.005      1.005       -
+eveto   lnN     1.005       1.005      1.005      1.005        -        1.005      1.005      1.005      1.005       -
+ttnormSF lnN      -           -          -        1.1          -          -          -          -        1.1         -
+tteffSF  lnN      -           -          -        1.1          -          -          -          -        0.97        -
 -------------------------------
 qcdeff  flatParam
 p1r0  flatParam

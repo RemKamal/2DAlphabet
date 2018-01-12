@@ -1,0 +1,60 @@
+imax 2 # number of observables/bins (pass and fail so '2') 
+jmax 6 # number of background sources (qcd, ttbar, st_t, st_tB, st_tW, st_tWB)
+kmax # number of nuisance parameters/sources of sytematic uncertainty ()
+
+-----------------------------------------------------------------------------------
+# Binned shape analysis
+# ---------------------
+# This block defines how channels and processes are mapped into shapes
+# Syntax: shapes process channel file histogram [histogram_with_systematics]
+
+shapes *              fail_cat1  base.root          w_fail_cat1:$PROCESS_fail_cat1      w_fail_cat1:$PROCESS_fail_cat1_$SYSTEMATIC
+shapes qcd            fail_cat1  ralphabase.root    w_fail_cat1:$PROCESS_fail_cat1
+shapes *              pass_cat1  base.root          w_pass_cat1:$PROCESS_pass_cat1      w_pass_cat1:$PROCESS_pass_cat1_$SYSTEMATIC
+shapes qcd            pass_cat1  ralphabase.root    w_pass_cat1:$PROCESS_pass_cat1
+
+-----------------------------------------------------------------------------------
+# Lines describing what is observed
+# ---------------------------------
+# bin - the channel the column is refering to
+# process - Line 1 has labels of various sources
+# process - Line 2 has process IDs (poitive number for backgrounds, 0 or negative for signals - use difference IDs for different processes)
+# rate - expected yield of events in the specified bin and process
+#      - A value of -1 in the rate line indicates to combine to calculate the rate from the input TH1 (via TH1::Integral) or RooDataSet/RooDataHist (via RooAbsData::sumEntries)
+#      - A value of 1 in the rate line is if you're using straight parametric shapes (RooAbsPdf). 
+#      --- If a parameter is found in the input workspace with the name pdfname_norm, the rate will be multiplied by the value of that parameter. 
+#      --- Note that since this parameter can be freely floating, the normalization of a shape can be made to freely float this way. 
+
+bin              pass_cat1        pass_cat1  pass_cat1   pass_cat1   fail_cat1        fail_cat1  fail_cat1   fail_cat1  
+process          signalLH1200     ttbar      st          qcd         signalLH1200     ttbar      st          qcd
+process          0                1          2           3           0                1          2           3   
+rate             -1               -1         -1          1           -1               -1         -1          1
+
+-----------------------------------------------------------------------------------
+# Systematic uncertainties
+# ------------------------
+# Syntax: name type value_pass_cat1 value_pass_cat2 ...
+lumi    lnN      1.023      1.023      1.023       -           -        1.023      1.023      1.023        -         -
+scale   shape    0.03       0.03       0.03        -           -        0.03       0.03       0.03         -         -
+smear   shape    1.0        1.0        1.0         -           -        1.0        1.0        1.0          -         -
+veff    lnN      0.91       0.91       0.91        -           -        1.006      1.006      1.006        -         -
+znormQ  lnN      1.1        1.1        1.1         -           -        1.1        1.1        1.1          -         -
+znormE1  lnN      -         1.15       1.15        -           -          -        1.15       1.15         -         -
+wznormE1 lnN      -         1.05        -          -           -          -        1.05         -          -         -
+jecs    lnN     1.02        1.02       1.02       1.02         -        1.02       1.02       1.02       1.02        -
+trigger lnN     1.02        1.02       1.02       1.02         -        1.02       1.02       1.02       1.02        -
+muveto  lnN     1.005       1.005      1.005      1.005        -        1.005      1.005      1.005      1.005       -
+eveto   lnN     1.005       1.005      1.005      1.005        -        1.005      1.005      1.005      1.005       -
+ttnormSF lnN      -           -          -        1.1          -          -          -          -        1.1         -
+tteffSF  lnN      -           -          -        1.1          -          -          -          -        0.97        -
+
+-----------------------------------------------------------------------------------
+# `name flatParam` specifies a parameter that is freely floating across its given range, and not gaussian constrained
+# We have three floating objects - QCDeff, parameters of the Rp/f, the values in the fail bins for QCD
+qcdeff  flatParam
+p1r0  flatParam
+p2r0  flatParam
+...
+qcd_fail_cat1_Bin1 flatParam 
+...
+qcd_fail_cat1_Bin31 flatParam 
