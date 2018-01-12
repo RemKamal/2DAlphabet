@@ -18,7 +18,7 @@ This code is copied from [here](https://github.com/DAZSLE/ZPrimePlusJet/tree/zqq
         * Finally, 'converts' systematics and smear and shift hists to RooDataHists and writes EVERYTHING to the final workspace
       
 ## To-Do List
-- [ ] Comment ZqqJet/makeCards.py and Phibb/makeCardsPhibb.py
+- [X] Created CardCheatSheet.txt ~Comment ZqqJet/makeCards.py and Phibb/makeCardsPhibb.py~
 - [ ] Convert one of the makeCards*.py to makeCardsBstarTW.py
 - [ ] Make a script that converts TWanalyzer.py output to input for rhalphabet (similar to TWanalyzer_organizer.py)
 - [ ] Make rhalphabet_builder_bstarTW.py from rhalphabet_bulder_Phibb.py
