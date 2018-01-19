@@ -20,9 +20,12 @@ from rhalphabet_builder_Phibb import BB_SF,BB_SF_ERR,V_SF,V_SF_ERR,GetSF
 
 ##-------------------------------------------------------------------------------------
 def main(options,args):
+    # Set jet type
     jet_type = 'AK8'
     if 'CA15' in options.ifile:
         jet_type = 'CA15'
+
+    # For each signal model and mass...
     for model in ["DMSbb"]: # [PS, Zp]
         for mass in massIterable(options.masses):
             tfile = r.TFile.Open(options.ifile)

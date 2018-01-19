@@ -17,7 +17,7 @@ from tools import *
 
 ##-------------------------------------------------------------------------------------
 def main(options,args):
-    
+    # Open the data card template corresponding to the proper polynomial orders
     if options.np==2 and options.nr==2:
         dctpl = open("datacard.tpl");
     if options.np==3 and options.nr==2:
@@ -27,22 +27,32 @@ def main(options,args):
     if options.np==3 and options.nr==3:
         dctpl = open("datacard33.tpl");
 
+    # Set number of mass bins
     numberOfMassBins = options.nmass;
 
+    # For each line in the template...
     linel = [];
     for line in dctpl: 
         print line.strip().split();
+        # Append the line to the line list after stripping it of white space at the beginning and end of the string
         linel.append(line.strip());
 
+    # For each pt category...
     for i in range(1,5):
 
         tag = "cat"+str(i);
+        # Open the output text file for writing
         dctmp = open("cards/card_rhalphabet_%s.txt" % tag, 'w')
+        # For each line in line list...
         for l in linel:
             newline = l;
+            # Replace all instances of "CATX" with tag (ex 'cat0')
             if "CATX" in l: newline = l.replace('CATX',tag);
+            # Write the line
             dctmp.write(newline + "\n");
+        # For each mass bin...
         for im in range(numberOfMassBins):
+            # Write the string that allows the fail events in that bin to float
             dctmp.write("qcd_fail_%s_Bin%i flatParam \n" % (tag,im+1))
 
 
