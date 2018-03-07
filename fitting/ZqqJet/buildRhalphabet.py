@@ -307,7 +307,18 @@ class dazsleRhalphabetBuilder:
         self._allData = [];
         self._allPars = [];
 
+        self.polyArray = []
+
+        #  ----------------------
+        # | buildPolynomialArray |
+        #  ----------------------
+        # Build polynomial array with n (= (order in pt)*(order in rho)) parameters
+        # Input empty list, polynomial order rho, polynomial order pt, rho string, pt string,  
+        # Output is a filled polyArray
+        self.buildPolynomialArray(self.polyArray,self._poly_lNR,self._poly_lNP,"r","p",-1.0,1.0)
+
         self.LoopOverPtBins();
+
 
     # Keeping this as a separate function rather than merging with __init__ to separate the 'defining' from the 'doing' 
     def LoopOverPtBins(self):
@@ -512,16 +523,6 @@ class dazsleRhalphabetBuilder:
         self._lEffQCD.setConstant(False)
 
         
-        polyArray = []
-
-        #  ----------------------
-        # | buildPolynomialArray |
-        #  ----------------------
-        # Build polynomial array with n (= (order in pt)*(order in rho)) parameters
-        # Input empty list, polynomial order rho, polynomial order pt, rho string, pt string,  
-        # Output is a filled polyArray
-        self.buildPolynomialArray(polyArray,self._poly_lNR,self._poly_lNP,"r","p",-1.0,1.0)
-
 
         # Initialize some arg lists to store the bin values
         lPassBins = r.RooArgList()
@@ -540,7 +541,7 @@ class dazsleRhalphabetBuilder:
             # Creates the rho RooPolyVar (basically a polynomial function) for this pt bin
             # Input value of pt and rho RooVars, unity constant (1), zero constant (0), and the polynomial array 
             # Output is a 2D RooPolyVar
-            lPass = self.buildRooPolyArray(self._lPt.getVal(),self._lRho.getVal(),lUnity,lZero,polyArray)
+            lPass = self.buildRooPolyArray(self._lPt.getVal(),self._lRho.getVal(),lUnity,lZero,self.polyArray)
 
             # Initialize some counting of event yeilds in the fail distributions
             pSum = 0 # Data - ewk

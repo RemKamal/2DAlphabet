@@ -21,7 +21,5 @@ Steps to run ralphabet
 python buildRhalphabet.py -b
 python makeCards.py
 - run whatever the last line of output from makeCards.py is
-mv ralphabase.root_34_pt ralphabase_34_pt.root
-combine -M MaxLikelihoodFit card_rhalphabet_34_pt.txt --saveWithUncertainties --saveShapes -v 2 --rMin -50 --rMax 50
 combine -M Asymptotic card_rhalphabet_34_pt.txt --rMin -50 --rMax 50
 

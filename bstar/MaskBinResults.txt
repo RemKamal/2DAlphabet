@@ -1,0 +1,40 @@
+STARTING VALUE
+
+[lcorcodi@cmslpc36 bstar]$ root base.root
+root [0]
+Attaching file base.root as _file0...
+(class TFile *) 0x2d19010
+...
+root [2] w_test->var("Fail_bin_4-29")->Print()
+RooRealVar::Fail_bin_4-29 = 25.177  L(0 - 100000)
+root [3] .q
+
+TRUE VALUE 
+
+[lcorcodi@cmslpc36 bstar]$ python
+>>> myf = TFile.Open('Full2D_input.root')
+>>> print myf.Get('data_obs_fail').GetBinContent(4,29)
+18.2897605896
+>>> print myf.Get('data_obs_fail').GetXaxis().GetBinCenter(4)
+155.0
+>>> print myf.Get('data_obs_fail').GetBinContent(4,30)
+14.3794240952
+>>> print myf.Get('data_obs_fail').GetBinContent(4,28)
+23.4220600128
+
+ENDING VALUE
+
+>>> myf2 = TFile.Open('MaxLikelihoodFitResult.root')
+>>> mywout = myf2.Get('MaxLikelihoodFitResult')
+>>> mywout.var("Fail_bin_4-29").Print()
+RooRealVar::Fail_bin_4-29 = 18.7851  L(0 - 100000)
+>>>
+
+
+RESULT WITH NO MASK
+
+>>> myf2 = TFile.Open('MaxLikelihoodFitResult.root')
+>>> mywout = myf2.Get('MaxLikelihoodFitResult')
+>>> mywout.var("Fail_bin_4-29").Print()
+RooRealVar::Fail_bin_4-29 = 18.785 +/- 4.68163  L(15.2909 - 21.2886)
+>>>

@@ -1,0 +1,70 @@
+imax 1
+jmax 1
+kmax 2
+--------------------------------------------
+shapes  signal   main    base.root   w_test:signal_main   w_test:signal_main_$SYSTEMATIC
+shapes  mybkg   main    base.root   w_test:mybkg_main
+shapes  data_obs   main    base.root   w_test:data_obs_main
+--------------------------------------------
+bin main 
+observation -1
+--------------------------------------------
+bin         main        main
+process     signal      mybkg
+process     0           1
+rate        -1          1
+--------------------------------------------
+lumi    lnN     1.023   - 
+
+smear   shape  1.0      -
+--------------------------------------------
+mybkg_binVar_1-1 flatParam
+mybkg_binVar_1-2 flatParam
+mybkg_binVar_1-3 flatParam
+mybkg_binVar_1-4 flatParam
+mybkg_binVar_1-5 flatParam
+mybkg_binVar_2-1 flatParam
+mybkg_binVar_2-2 flatParam
+mybkg_binVar_2-3 flatParam
+mybkg_binVar_2-4 flatParam
+mybkg_binVar_2-5 flatParam
+mybkg_binVar_3-1 flatParam
+mybkg_binVar_3-2 flatParam
+mybkg_binVar_3-3 flatParam
+mybkg_binVar_3-4 flatParam
+mybkg_binVar_3-5 flatParam
+mybkg_binVar_4-1 flatParam
+mybkg_binVar_4-2 flatParam
+mybkg_binVar_4-3 flatParam
+mybkg_binVar_4-4 flatParam
+mybkg_binVar_4-5 flatParam
+mybkg_binVar_5-1 flatParam
+mybkg_binVar_5-2 flatParam
+mybkg_binVar_5-3 flatParam
+mybkg_binVar_5-4 flatParam
+mybkg_binVar_5-5 flatParam
+mybkg_binVar_6-1 flatParam
+mybkg_binVar_6-2 flatParam
+mybkg_binVar_6-3 flatParam
+mybkg_binVar_6-4 flatParam
+mybkg_binVar_6-5 flatParam
+mybkg_binVar_7-1 flatParam
+mybkg_binVar_7-2 flatParam
+mybkg_binVar_7-3 flatParam
+mybkg_binVar_7-4 flatParam
+mybkg_binVar_7-5 flatParam
+mybkg_binVar_8-1 flatParam
+mybkg_binVar_8-2 flatParam
+mybkg_binVar_8-3 flatParam
+mybkg_binVar_8-4 flatParam
+mybkg_binVar_8-5 flatParam
+mybkg_binVar_9-1 flatParam
+mybkg_binVar_9-2 flatParam
+mybkg_binVar_9-3 flatParam
+mybkg_binVar_9-4 flatParam
+mybkg_binVar_9-5 flatParam
+mybkg_binVar_10-1 flatParam
+mybkg_binVar_10-2 flatParam
+mybkg_binVar_10-3 flatParam
+mybkg_binVar_10-4 flatParam
+mybkg_binVar_10-5 flatParam

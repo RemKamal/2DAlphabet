@@ -1,0 +1,38 @@
+imax 4
+jmax 1
+kmax 2
+--------------------------------------------
+shapes  signalRH1200    passLow     base.root   w_test:signalRH1200_passLow   w_test:signalRH1200_passLow_$SYSTEMATIC
+shapes  qcd             passLow     base.root   w_test:qcd_passLow
+shapes  data_obs        passLow     base.root   w_test:data_obs_passLow
+
+shapes  signalRH1200    failLow     base.root   w_test:signalRH1200_failLow   w_test:signalRH1200_failLow_$SYSTEMATIC
+shapes  qcd             failLow     base.root   w_test:qcd_failLow
+shapes  data_obs        failLow     base.root   w_test:data_obs_failLow
+
+shapes  signalRH1200    passHigh    base.root   w_test:signalRH1200_passHigh   w_test:signalRH1200_passHigh_$SYSTEMATIC
+shapes  qcd             passHigh    base.root   w_test:qcd_passHigh
+shapes  data_obs        passHigh    base.root   w_test:data_obs_passHigh
+
+shapes  signalRH1200    failHigh    base.root   w_test:signalRH1200_failHigh   w_test:signalRH1200_failHigh_$SYSTEMATIC
+shapes  qcd             failHigh    base.root   w_test:qcd_failHigh
+shapes  data_obs        failHigh    base.root   w_test:data_obs_failHigh
+--------------------------------------------
+bin         passLow    failLow      passHigh    failHigh
+observation -1          -1          -1          -1
+--------------------------------------------
+bin         passLow         passLow     passHigh        passHigh    failLow         failLow     failHigh        failHigh
+process     signalRH1200    qcd         signalRH1200    qcd         signalRH1200    qcd         signalRH1200    qcd
+process     0               1           0               1           0               1           0               1
+rate        -1              1           -1              1           -1              1           -1              1
+--------------------------------------------
+lumi lnN    1.023           -           1.023           -           1.023           -           1.023           -
+
+W shape     1.0             -           1.0             -           1.0             -           1.0             -
+--------------------------------------------
+polyCoeff_x0y0 flatParam
+polyCoeff_x1y0 flatParam
+polyCoeff_x2y0 flatParam
+polyCoeff_x0y1 flatParam
+polyCoeff_x1y1 flatParam
+polyCoeff_x2y1 flatParam
