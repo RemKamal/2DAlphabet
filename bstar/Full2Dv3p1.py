@@ -249,7 +249,6 @@ if __name__ == '__main__':
     polXO = 2
     PolyCoeffs = {}
     for yi in range(polYO+1):
-        thisXCoeffList = RooArgList()
         for xi in range(polXO+1):
             name = 'polyCoeff_'+'x'+str(xi)+'y'+str(yi)
             PolyCoeffs['x'+str(xi)+'y'+str(yi)] = RooRealVar(name,name,myguesses['nom'][xi][yi],myguesses['down'][xi][yi],myguesses['up'][xi][yi])

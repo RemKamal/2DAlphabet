@@ -9,6 +9,26 @@
 - copycommand = cp
 
 # Sections listed
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 1 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 2 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 3 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 4 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 5 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 6 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 7 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 8 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 9 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 10 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 11 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 12 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 13 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 14 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 15 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 16 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 17 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 18 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 19 -j 20 -c default
+output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s data -g on -n 20 -j 20 -c default
 output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s signalLH1200 -g on -c default
 output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s signalLH1400 -g on -c default
 output_$(JID)        python ./tardir/TWanalyzer_2Dalphabet.py -s signalLH1600 -g on -c default

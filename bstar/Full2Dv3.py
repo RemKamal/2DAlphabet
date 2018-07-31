@@ -119,14 +119,14 @@ if __name__ == '__main__':
             name = 'Fail_bin_'+str(xbin)+'-'+str(ybin)
 
             # Mask out anything in the signal region by making a RRV with value from 0 to 1000000
-            if TH2_data_fail.GetXaxis().GetBinLowEdge(xbin+1) > 150 and TH2_data_fail.GetXaxis().GetBinLowEdge(xbin) < 190:
-                binRRV = RooRealVar(name, name, binContent, 0, 100000)
-                print 'Creating masked bin ' + name
-            else:
-                binContent = TH2_data_fail.GetBinContent(xbin,ybin)
-                binErrUp = binContent + TH2_data_fail.GetBinErrorUp(xbin,ybin)*5
-                binErrDown = binContent - TH2_data_fail.GetBinErrorLow(xbin,ybin)*5
-                binRRV = RooRealVar(name, name, binContent, max(binErrDown,0), max(binErrUp,0))
+            # if TH2_data_fail.GetXaxis().GetBinLowEdge(xbin+1) > 150 and TH2_data_fail.GetXaxis().GetBinLowEdge(xbin) < 190:
+            #     binRRV = RooRealVar(name, name, binContent, 0, 100000)
+            #     print 'Creating masked bin ' + name
+            # else:
+            binContent = TH2_data_fail.GetBinContent(xbin,ybin)
+            binErrUp = binContent + TH2_data_fail.GetBinErrorUp(xbin,ybin)*5
+            binErrDown = binContent - TH2_data_fail.GetBinErrorLow(xbin,ybin)*5
+            binRRV = RooRealVar(name, name, binContent, max(binErrDown,0), max(binErrUp,0))
             
             # Store the bin
             binListFail.add(binRRV)

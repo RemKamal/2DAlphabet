@@ -2,7 +2,7 @@ import ROOT
 from ROOT import *
 
 gROOT.SetBatch(kTRUE)
-# gStyle.SetOptStat(0)
+gStyle.SetOptStat(0)
 
 allVars = []
 
@@ -117,11 +117,12 @@ RPV_rpf_func = RooPolyVar("FullPol","FullPol",yVar,xPolyList)
 allVars.append(RPV_rpf_func)
 
 # And make a histogram from that
-TH2_rpf_func = RPV_rpf_func.createHistogram("Rpf_func",xVar,RooFit.Binning(xnbins,xlow,xhigh),RooFit.YVar(yVar,RooFit.Binning(ynbins,ylow,yhigh))) 
+TH2_rpf_func = RPV_rpf_func.createHistogram("Rpf_func",xVar,RooFit.Binning(xnbins,xlow,xhigh),RooFit.YVar(yVar,RooFit.Binning(ynbins,ylow,yhigh)),RooFit.Scaling(False)) 
 
 # And finally get the true Rpf
 TH2_rpf_true = TH2_dataPass.Clone()
 TH2_rpf_true.Divide(TH2_dataFail)
+TH2_rpf_true.RebinY(3)
 
 # Now make some pull surfaces
 pull_Data_Bkg_Fail = TH2_dataFail.Clone('pull_Data_Bkg_Fail')
@@ -221,7 +222,7 @@ ratioCan.Print('Plots/Full2Dv3_ratio_results.root','root')
 RpfsCan = TCanvas('RpfsCan','RpfsCan',1800,800)
 RpfsCan.Divide(2,1)
 RpfsCan.cd(1)
-TH2_rpf_true.Draw('surf')
+TH2_rpf_true.Draw('lego')
 RpfsCan.cd(2)
 TH2_rpf_func.Draw('surf')
 

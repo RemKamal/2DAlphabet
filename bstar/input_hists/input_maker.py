@@ -10,8 +10,8 @@ dictFiles = {
 outfile = TFile('../Full2D_input.root','recreate')
 
 # Need a dummy histogram to store sideband and signal bounds in TAxis
-TH1_region_bounds = TH1F('TH1_region_bounds','TH1_region_bounds',1,140,200)
-TH1_region_bounds.SetBinContent(1,10)   # This is a way to store the bin width of the x bins easily
+TH1_region_bounds = TH1F('TH1_region_bounds','TH1_region_bounds',1,150,190)
+TH1_region_bounds.SetBinContent(1,20)   # This is a way to store the bin width of the x bins easily
 TH1_region_bounds.Write()
 
 # Loop through keys and pass and fail
@@ -35,7 +35,7 @@ for dataset in dictFiles.keys():
         thisHist.GetYaxis().SetTitle('resmass')
 
         # Default 60 bins in Mt and 35 bins in Mtw
-        # thisHist.RebinX(6)
+        thisHist.RebinX(6)
 
         # Write out
         outfile.cd()
@@ -55,7 +55,7 @@ for dataset in dictFiles.keys():
                 thisHistUp.GetYaxis().SetName('resmass')
                 thisHistUp.GetYaxis().SetTitle('resmass')
 
-                # thisHistUp.RebinX(6)
+                thisHistUp.RebinX(6)
 
                 thisHistDown = thisFile.Get('MtwvMt'+cat+u+'down').Clone()
 
@@ -66,7 +66,7 @@ for dataset in dictFiles.keys():
                 thisHistDown.GetYaxis().SetName('resmass')
                 thisHistDown.GetYaxis().SetTitle('resmass')
 
-                # thisHistDown.RebinX(6)
+                thisHistDown.RebinX(6)
 
                 outfile.cd()
                 thisHistUp.Write()

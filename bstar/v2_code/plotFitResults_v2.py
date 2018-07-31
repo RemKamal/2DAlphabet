@@ -2,6 +2,7 @@ import ROOT
 from ROOT import *
 
 gROOT.SetBatch(kTRUE)
+gStyle.SetOptStat(0)
 
 allVars = []
 
@@ -129,15 +130,19 @@ ratio_RpfTrue_RpfFunc.Divide(TH2_rpf_func)
 #####################################
 
 # Print our four 2D distributions (data, bkg, pass, fail)
+TH2_QcdFail.SetTitle('Estimate : Fail')
+TH2_QcdPass.SetTitle('Estimate : Pass')
+TH2_dataFail.SetTitle('Data : Fail')
+TH2_dataPass.SetTitle('Data : Pass')
 DataVBkgCan = TCanvas('DataVBkgCan','DataVBkgCan',1200,1000)
 DataVBkgCan.Divide(2,2)
-DataVBkgCan.cd(1)
-TH2_QcdFail.Draw('lego')
-DataVBkgCan.cd(2)
-TH2_QcdPass.Draw('lego')
-DataVBkgCan.cd(3)
-TH2_dataFail.Draw('lego')
 DataVBkgCan.cd(4)
+TH2_QcdFail.Draw('lego')
+DataVBkgCan.cd(3)
+TH2_QcdPass.Draw('lego')
+DataVBkgCan.cd(2)
+TH2_dataFail.Draw('lego')
+DataVBkgCan.cd(1)
 TH2_dataPass.Draw('lego')
 
 DataVBkgCan.Print('Plots/Full2Dv2_DataVsBkg_results.pdf','pdf')

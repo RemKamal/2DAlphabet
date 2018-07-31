@@ -2,13 +2,9 @@ imax 2
 jmax 1
 kmax 2
 --------------------------------------------
-shapes  signalRH1200    pass    base.root   w_test:signalRH1200_pass   w_test:signalRH1200_pass_$SYSTEMATIC
-shapes  qcd             pass    base.root   w_test:qcd_pass
-shapes  data_obs        pass    base.root   w_test:data_obs_pass
-
-shapes  signalRH1200    fail    base.root   w_test:signalRH1200_fail   w_test:signalRH1200_fail_$SYSTEMATIC
-shapes  qcd             fail    base.root   w_test:qcd_fail
-shapes  data_obs        fail    base.root   w_test:data_obs_fail
+shapes  signalRH1200    *    base.root   w_test:signalRH1200_$CHANNEL   w_test:signalRH1200_$CHANNEL_$SYSTEMATIC
+shapes  qcd             *    base.root   w_test:qcd_$CHANNEL
+shapes  data_obs        *    base.root   w_test:data_obs_$CHANNEL
 --------------------------------------------
 bin         pass    fail 
 observation -1      -1

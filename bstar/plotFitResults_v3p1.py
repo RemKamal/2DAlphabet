@@ -281,6 +281,8 @@ if __name__ == '__main__':
     TH2_rpf_true.SetTitle('True R_{P/F} (Data_{pass}/Data_{fail})')
     TH2_rpf_func.SetTitle('Fitted R_{P/F} (from Combine)')
 
+    TH2_rpf_true.RebinY(3)
+
     #####################################
     #   Save out the interesting stuff  #
     #####################################
@@ -334,7 +336,7 @@ if __name__ == '__main__':
     RpfsCan = TCanvas('RpfsCan','RpfsCan',1800,800)
     RpfsCan.Divide(2,1)
     RpfsCan.cd(1)
-    TH2_rpf_true.Draw('surf')
+    TH2_rpf_true.Draw('lego')
     RpfsCan.cd(2)
     TH2_rpf_func.Draw('surf')
 
